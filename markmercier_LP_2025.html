@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mark Mercier - Operations Executive specializing in manufacturing strategy and execution across regulated industries.">
+    <title>Mark Mercier - Operations Executive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --navy: #0A2342;
+            --slate: #334756;
+            --light-slate: #7389a2;
+            --off-white: #F8F9FA;
+            --accent: #3E6990;
+            --transition: all 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--slate);
+            background-color: var(--off-white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(rgba(10, 35, 66, 0.85), rgba(10, 35, 66, 0.9)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;
+            color: white;
+            position: relative;
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.3s;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.6s;
+        }
+        
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.9s;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--navy);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--off-white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: pulse 2s infinite, fadeIn 1s forwards 1.2s;
+            cursor: pointer;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .about-container {
+            max-width: 800px;
+        }
+        
+        .timeline-dots {
+            display: flex;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            gap: 1.5rem;
+        }
+        
+        .experience-milestone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .experience-milestone span {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--navy);
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-slate);
+        }
+        
+        .dot.active {
+            background-color: var(--accent);
+        }
+        
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .impact-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--accent);
+        }
+        
+        .impact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon {
+            margin-right: 0.75rem;
+            color: var(--accent);
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .impact-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .impact-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .impact-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background-color: var(--light-slate);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: var(--transition);
+        }
+        
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 4px solid white;
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content p {
+            margin-bottom: 0.25rem;
+            color: var(--light-slate);
+        }
+        
+        .timeline-content ul {
+            margin-top: 1rem;
+            padding-left: 1.25rem;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tech-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .tech-tag {
+            background-color: white;
+            border: 1px solid var(--light-slate);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .tech-tag:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .education-certs {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .education-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cert-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .cert-badge {
+            background-color: var(--off-white);
+            border-radius: 8px;
+            padding: 1rem;
+            width: calc(50% - 0.5rem);
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .cert-badge:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cert-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .connect {
+            text-align: center;
+            background: linear-gradient(to bottom, var(--off-white), white);
+            padding-bottom: 5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-icon {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .contact-link {
+            color: var(--navy);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero .cta-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .impact-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 45px;
+            }
+            
+            .timeline-item::before {
+                width: 16px;
+                height: 16px;
+                left: 8px;
+            }
+            
+            .cert-badge {
+                width: 100%;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Add fixed navigation menu */
+        .nav-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--navy);
+            padding: 0.75rem 0;
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-fixed.visible {
+            transform: translateY(0);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        .nav-link:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="nav-fixed">
+        <div class="container nav-container">
+            <a href="#home" class="nav-logo">Mark Mercier</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="#journey" class="nav-link">Experience</a>
+                <a href="#connect" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="container">
+            <h1>Mark E. Mercier</h1>
+            <p>Operations Executive | Manufacturing Strategy & Execution</p>
+            <p>Transforming complex manufacturing environments in regulated industries through operational excellence.</p>
+            <div class="cta-buttons">
+                <a href="https://drive.google.com/file/d/1MtEDUZL_8-9sBs59j2fwUTqTpIdP9jkm/view?usp=sharing" target="_blank" class="btn btn-primary">Download Resume</a>
+                <a href="https://www.linkedin.com/in/mark-mercier/" target="_blank" class="btn btn-secondary">View LinkedIn</a>
+            </div>
+        </div>
+        <a href="#about" class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </header>
+    
+    <section id="about" class="about">
+        <div class="container about-container">
+            <h2 class="section-title fade-in">About Mark</h2>
+            <div class="fade-in">
+                <p>Mark Mercier is a strategic operations executive who delivers transformational results in complex regulated manufacturing environments. His expertise spans medical devices, pharmaceuticals, and consumer goods, where he consistently optimizes performance through disciplined execution and innovative systems thinking.</p>
+                <br>
+                <p>Under his leadership, organizations achieve sustainable growth through cost reduction, regulatory excellence, and scalable operational frameworks that adapt to evolving market demands.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="impact" class="impact">
+        <div class="container">
+            <h2 class="section-title fade-in">What I Deliver</h2>
+            <div class="impact-cards">
+                <div class="impact-card fade-in">
+                    <h3><svg class="card-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M13 3H11V13H13V3M17.83 5.17L16.41 6.59C18.05 7.91 19 9.9 19 12C19 15.87 15.87 19 12 19C8.13 19 5 15.87 5 12C5 9.91 5.95 7.91 7.58 6.58L6.17 5.17C4.21 6.82 3 9.26 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 9.26 19.79 6.82 17.83 5.17Z" /></svg>Efficiency</h3>
+                    <ul>
+                        <li>$2.5M annual savings via site consolidation</li>
+                        <li>25% production efficiency boost</li>
+                        <li>$1.8M reduction in working capital</li>
+                    </ul>
+                </div>
+                <div class="impact-card fade-in">
+                    <h3><svg class="card-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5Z" /></svg>Compliance</h3>
+                    <ul>
+                        <li>Zero-observation FDA/ISO audits</li>
+                        <li>65% process time reduction via digital workflows</li>
+                        <li>34% output increase with fewer quality issues</li>
+                    </ul>
+                </div>
+                <div class="impact-card fade-in">
+                    <h3><svg class="card-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M2,2V4H7V8H2V10H7C8.1,10 9,9.1 9,8V4C9,2.9 8.1,2 7,2H2M22,15C22,13.9 21.1,13 20,13H11V15H20V19H11V21H20C21.1,21 22,20.1 22,19V15M10,9C10,10.1 10.9,11 12,11H22V9H12V5H22V3H12C10.9,3 10,3.9 10,5V9Z" /></svg>Strategy</h3>
+                    <ul>
+                        <li>Conducted rigorous manufacturing due diligence for acquisitions</li>
+                        <li>Optimized global manufacturing network across multiple business units</li>
+                        <li>Created standardized framework for acquisition evaluations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="journey" class="journey">
+        <div class="container">
+            <h2 class="section-title fade-in">Executive Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Euclid Vision Corp.</h3>
+                        <p>VP Operational Excellence, VP Ops & Tech</p>
+                        <p><small>2021 - 2025</small></p>
+                        <ul>
+                            <li>Orchestrated $2.5M cost reduction through strategic site consolidation</li>
+                            <li>Led digital transformation achieving 65% process efficiency gains</li>
+                            <li>Delivered $4.2M in M&A synergies by optimizing manufacturing operations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>BlephEx</h3>
+                        <p>VP Operations</p>
+                        <p><small>2019 - 2021</small></p>
+                        <ul>
+                            <li>Spearheaded global product launch strategy with 40% better time-to-market</li>
+                            <li>Redesigned supply chain, reducing lead times by 35% and costs by 18%</li>
+                            <li>Strengthened distributor partnerships, expanding market reach by 45%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Bausch + Lomb</h3>
+                        <p>VP Operations Strategy & VP External Manufacturing</p>
+                        <p><small>2010 - 2013</small></p>
+                        <ul>
+                            <li>Delivered $300M+ in validated savings over three-year period</li>
+                            <li>Generated $20M annual savings through optimized external manufacturing</li>
+                            <li>Implemented quality systems across 50+ contract manufacturers</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Gibson Brands</h3>
+                        <p>General Manager, USA Electric Division</p>
+                        <p><small>2015</small></p>
+                        <ul>
+                            <li>Managed $120M P&L for iconic American guitar manufacturer</li>
+                            <li>Reduced labor costs by $2M while launching new product line</li>
+                            <li>Enhanced production quality while maintaining brand standards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="tech" class="tech">
+        <div class="container">
+            <h2 class="section-title fade-in">Tools & Systems Proficiency</h2>
+            <div class="tech-tools">
+                <div class="tech-tag fade-in">ERP Platforms</div>
+                <div class="tech-tag fade-in">QMS & FDA/ISO Compliance</div>
+                <div class="tech-tag fade-in">Production Scheduling Systems</div>
+                <div class="tech-tag fade-in">Electronic Documentation</div>
+                <div class="tech-tag fade-in">Manufacturing Analytics</div>
+                <div class="tech-tag fade-in">Supply Chain Management</div>
+                <div class="tech-tag fade-in">LEAN/Six Sigma Methodologies</div>
+                <div class="tech-tag fade-in">Quality Control Systems</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education" class="education">
+        <div class="container education-certs">
+            <h2 class="section-title fade-in">Education & Credentials</h2>
+            <div class="education-box fade-in">
+                <h3>Education</h3>
+                <p>B.S., Industrial Technology – Central Connecticut State University</p>
+                
+                <h3 class="mt-6">Certifications</h3>
+                <div class="cert-badges">
+                    <div class="cert-badge fade-in">
+                        <svg class="cert-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,10.5A1.5,1.5 0 0,1 13.5,12A1.5,1.5 0 0,1 12,13.5A1.5,1.5 0 0,1 10.5,12A1.5,1.5 0 0,1 12,10.5M7.5,12A1.5,1.5 0 0,1 9,13.5A1.5,1.5 0 0,1 7.5,15A1.5,1.5 0 0,1 6,13.5A1.5,1.5 0 0,1 7.5,12M16.5,12A1.5,1.5 0 0,1 18,13.5A1.5,1.5 0 0,1 16.5,15A1.5,1.5 0 0,1 15,13.5A1.5,1.5 0 0,1 16.5,12Z" /></svg>
+                        <div>Six Sigma Black Belt</div>
+                    </div>
+                    <div class="cert-badge fade-in">
+                        <svg class="cert-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>
+                        <div>FDA QSR Compliance</div>
+                    </div>
+                    <div class="cert-badge fade-in">
+                        <svg class="cert-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
+                        <div>Executive Leadership Development</div>
+                    </div>
+                    <div class="cert-badge fade-in">
+                        <svg class="cert-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z" /></svg>
+                        <div>Advanced Supply Chain Management</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="connect" class="connect">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Connect</h2>
+            <p class="fade-in">Transform your manufacturing operations with methodical, data-driven leadership.</p>
+            <div class="contact-info">
+                <div class="contact-method fade-in">
+                    <svg class="contact-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+                    <a href="mailto:markmercmail@gmail.com" class="contact-link">markmercmail@gmail.com</a>
+                </div>
+                <div class="contact-method fade-in">
+                    <svg class="contact-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg>
+                    <a href="tel:7274034878" class="contact-link">(727) 403-4878</a>
+                </div>
+                <div class="contact-method fade-in">
+                    <svg class="contact-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
+                    <span class="contact-link">Ashburn, VA</span>
+                </div>
+            </div>
+            <a href="https://www.linkedin.com/in/mark-mercier/" target="_blank" class="btn btn-primary fade-in">View LinkedIn</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mark Mercier. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Fixed navigation visibility
+            const navFixed = document.querySelector('.nav-fixed');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Show fixed nav when scrolling down past the hero section
+                if (scrollTop > window.innerHeight * 0.8) {
+                    navFixed.classList.add('visible');
+                } else {
+                    navFixed.classList.remove('visible');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // Optimized fade-in animations with a single IntersectionObserver
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const allAnimatedElements = [...fadeElements, ...timelineItems];
+            
+            const animationObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add delay for timeline items to create staggered effect
+                        if (entry.target.classList.contains('timeline-item')) {
+                            const index = Array.from(timelineItems).indexOf(entry.target);
+                            setTimeout(() => {
+                                entry.target.classList.add('active');
+                            }, index * 150);
+                        } else {
+                            entry.target.classList.add('active');
+                        }
+                        animationObserver.unobserve(entry.target); // Stop observing once activated
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+            
+            allAnimatedElements.forEach(element => {
+                animationObserver.observe(element);
+            });
+            
+            // Impact cards interactivity
+            const impactCards = document.querySelectorAll('.impact-card');
+            impactCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#f8f9fa';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'white';
+                });
+            });
+            
+            // Tech tags tooltip functionality
+            const techTags = document.querySelectorAll('.tech-tag');
+            const tooltips = [
+                'Expert in SAP, Oracle, and other enterprise solutions',
+                'Specialized in FDA 21 CFR Part 11 and ISO 13485 frameworks',
+                'Advanced analytics and production scheduling tools',
+                'Electronic batch record systems and validation',
+                'Experience with IIoT and smart factory implementation',
+                'JIT inventory management and procurement systems',
+                'Kaizen, 5S, and waste reduction methodologies',
+                'Statistical process control and root cause analysis'
+            ];
+            
+            techTags.forEach((tag, index) => {
+                tag.setAttribute('title', tooltips[index]);
+            });
+            
+            // Accessible enhancement for cert badges
+            const certBadges = document.querySelectorAll('.cert-badge');
+            certBadges.forEach(badge => {
+                badge.setAttribute('tabindex', '0');  // Make focusable for keyboard users
+            });
+        });
+    </script>
+</body>
+</html>
